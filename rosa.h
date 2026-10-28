@@ -1,6 +1,6 @@
-/* rosa.h — актёрный фреймворк ROSA/MARP поверх VOS, по образцу прошивки:
+/* rosa.h — акторный фреймворк ROSA/MARP поверх VOS, по образцу прошивки:
  *   - таблица FID (FID | FIDName | MsgProcTask)
- *   - актёр CAgent: свой почтовый ящик, состояние FSM, run-loop PushCmd->Dispatch
+ *   - актор CAgent: свой почтовый ящик, состояние FSM, run-loop PushCmd->Dispatch
  *   - MarpRootMsgDispatcher: маршрутизация по (dstFid -> msgType)
  *   - Guarder: предупреждает при затоваривании ящика ("Maybe msg overload!!!")
  *   - TLV-тело сообщений (ср. BBRD_RawMsgGetTlv) */
@@ -19,13 +19,13 @@ struct CAgent {
     VOS_MailBox   mbox;
     int           fsmState;
     ROSA_MsgProc  msgProc;
-    void         *ctx;            /* приватное состояние актёра */
+    void         *ctx;            /* приватное состояние актора */
 };
 
 void    ROSA_Init(void);
 CAgent *ROSA_RegisterFid(VOS_Fid fid, const char *name, ROSA_MsgProc proc, void *ctx);
 CAgent *ROSA_GetAgent(VOS_Fid fid);
-void    ROSA_StartAll(void);           /* по одной run-loop задаче на каждый актёр */
+void    ROSA_StartAll(void);           /* по одной run-loop задаче на каждый актор */
 void    ROSA_DumpFidTable(void);
 
 const char *ROSA_StateName(const char *const *names, int n, int st);

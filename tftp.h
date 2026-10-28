@@ -1,4 +1,4 @@
-/* tftp.h — чтение по TFTP/UDP (RFC 1350), реализованное как актёры ROSA. */
+/* tftp.h — чтение по TFTP/UDP (RFC 1350), реализованное как акторы ROSA. */
 #ifndef TFTP_H
 #define TFTP_H
 #include "rosa.h"
@@ -6,7 +6,7 @@
 #define FID_TFTP_SRV 2
 #define FID_TFTP_CLI 3
 
-/* зарегистрировать актёров сервера+клиента, открыть UDP-сокеты, запустить
+/* зарегистрировать акторов сервера+клиента, открыть UDP-сокеты, запустить
  * задачи-читатели NetRx. */
 void TFTP_SetupDemo(void);
 

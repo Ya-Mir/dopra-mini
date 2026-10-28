@@ -1,10 +1,10 @@
-# mini-DOPRA / ROSA — миниатюрный актёрный рантайм в духе Huawei, запускающий TFTP поверх UDP
+# mini-DOPRA / ROSA — миниатюрный акторный рантайм в духе Huawei, запускающий TFTP поверх UDP
 
-Минимальная, но достоверная реализация (на C) актёрного рантайма **DOPRA/ROSA**,
+Минимальная, но достоверная реализация (на C) акторного рантайма **DOPRA/ROSA**,
 восстановленного по прошивке базовой станции Huawei, с запуском поверх него
 реального сетевого протокола — **TFTP (RFC 1350), чтение файла по UDP**. Именно так
 RRU Huawei тянет образ прошивки с BBU, и этот протокол задействует все части
-рантайма: почтовые ящики актёров, диспетчер, конечные автоматы (FSM), таймеры
+рантайма: почтовые ящики акторов, диспетчер, конечные автоматы (FSM), таймеры
 ретрансмита и настоящие UDP-сокеты.
 
 Собрано под **реальный ABI прошивки**: ARMv7 **big-endian (BE8)**, Linux,
@@ -20,11 +20,11 @@ RRU Huawei тянет образ прошивки с BBU, и этот прото
 | `start.S` | минимальный crt1: `_start` → `__libc_start_main` (готового crt1.o нет) | glibc start.S |
 | `vos.c/.h` | VOS: задачи (pthreads), почтовые ящики, таймеры, семафоры | `VOS_CreateTask`, `VOS_SendMsg`, `VOS_AllocMsg`, `VOS_SmMCreate/SmP/SmV`, `VOS_StartRelTimer`, `VOS_GetTick` |
 | `rosa.c/.h` | ROSA: таблица FID, run-loop `CAgent`, диспетчер MarpRoot, Guarder, TLV | `CAgent::PushCmd/Dispatch`, `MarpRootMsgDispatcher`, таблица FID, `BBRD_RawMsgGetTlv` |
-| `tftp.c/.h` | актёры TFTP-сервера и клиента + задача NetRx, ретрансмит по таймеру VOS | — |
+| `tftp.c/.h` | акторы TFTP-сервера и клиента + задача NetRx, ретрансмит по таймеру VOS | — |
 | `main.c` | старт рантайма + две демо-передачи (чистая и с потерей пакета) | — |
 
 Путь одного пакета: `NetRx (сокет) → VOS_SendMsg → почтовый ящик CAgent →
-диспетчер MarpRoot (по dstFid→msgType) → FSM актёра → sendto`, а ретрансмит
+диспетчер MarpRoot (по dstFid→msgType) → FSM актора → sendto`, а ретрансмит
 запускает `VOS_StartRelTimer`, присылающий `VOS_MSG_TIMER`.
 
 ## Сборка (в WSL — тулчейн и sysroot прошивки лежат в `packer/tools/`)

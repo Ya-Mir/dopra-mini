@@ -1,4 +1,4 @@
-/* rosa.c — реализация актёрного фреймворка. */
+/* rosa.c — реализация акторного фреймворка. */
 #include "rosa.h"
 
 static CAgent *g_fidTable[VOS_MAX_FID];
@@ -25,8 +25,8 @@ CAgent *ROSA_GetAgent(VOS_Fid fid)
     return (fid < VOS_MAX_FID) ? g_fidTable[fid] : NULL;
 }
 
-/* run-loop = задача актёра CAgent: достать сообщение, прогнать Guarder, дать
- * диспетчеру MarpRoot направить его в MsgProcTask актёра. */
+/* run-loop = задача актора CAgent: достать сообщение, прогнать Guarder, дать
+ * диспетчеру MarpRoot направить его в MsgProcTask актора. */
 static void agent_runloop(void *arg)
 {
     CAgent *a = (CAgent *)arg;
