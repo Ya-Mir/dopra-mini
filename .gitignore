@@ -1,0 +1,5 @@
+# build artifacts
+*.o
+*.out
+# emulator binary (GPL, redistribute from upstream qemu, not this repo)
+bin/
